@@ -15,5 +15,20 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.jfapps.cryptonews.ui.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment" >
+        <argument
+            android:name="news"
+            app:argType="com.jfapps.cryptonews.model.News" />
+        <action
+            android:id="@+id/action_detailsFragment_to_newsWebViewFragment"
+            app:destination="@id/newsWebViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsWebViewFragment"
+        android:name="com.jfapps.cryptonews.ui.NewsWebViewFragment"
+        android:label="NewsWebViewFragment" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
 </navigation>

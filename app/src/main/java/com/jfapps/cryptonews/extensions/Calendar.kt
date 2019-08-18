@@ -17,3 +17,10 @@ fun dateToISO8601(date: Date): String {
     dateFormat.timeZone = TimeZone.getDefault()
     return dateFormat.format(date)
 }
+
+fun Calendar.toWritten(dateISO: String): String {
+    var dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+    val date = dateFormat.parse(dateISO)
+    dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
+    return dateFormat.format(date)
+}
