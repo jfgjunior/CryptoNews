@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">CryptoNews</string>
-    <string name="credit">Powered by NewsApi</string>
+    <string name="credit">Powered by <font color="#ff0099cc">NewsApi</font></string>
     <string name="continue_reading">Continue reading</string>
 </resources>

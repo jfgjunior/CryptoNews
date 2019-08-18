@@ -13,6 +13,10 @@ import kotlinx.coroutines.launch
 class NewsViewModel @AssistedInject constructor(
     @Assisted private val newsRepository: NewsRepository
 ): ViewModel() {
+    companion object {
+        const val CREDIT_URL = "https://newsapi.org/"
+    }
+
     val news: LiveData<List<News>>
         get() = newsRepository.news
 

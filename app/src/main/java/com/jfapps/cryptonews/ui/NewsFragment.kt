@@ -1,5 +1,7 @@
 package com.jfapps.cryptonews.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,7 @@ import com.jfapps.cryptonews.extensions.inject
 import com.jfapps.cryptonews.extensions.viewModel
 import com.jfapps.cryptonews.model.News
 import com.jfapps.cryptonews.viewmodel.NewsViewModel
+import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.fragment_news.news_list as newsList
 
 class NewsFragment : Fragment() {
@@ -43,6 +46,12 @@ class NewsFragment : Fragment() {
             Observer {
                 (newsList.adapter as NewsAdapter).submitList(it)
             })
+
+        credit.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(NewsViewModel.CREDIT_URL)
+            startActivity(intent)
+        }
     }
 
     private fun readNews(news: News) {
