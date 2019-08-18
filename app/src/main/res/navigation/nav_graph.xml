@@ -15,5 +15,9 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.jfapps.cryptonews.ui.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment" >
+        <argument
+            android:name="news"
+            app:argType="com.jfapps.cryptonews.model.News" />
+    </fragment>
 </navigation>
