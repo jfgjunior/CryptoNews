@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.jfapps.cryptonews.R
 import com.jfapps.cryptonews.databinding.FragmentNewsBinding
 import com.jfapps.cryptonews.extensions.inject
 import com.jfapps.cryptonews.extensions.viewModel
+import com.jfapps.cryptonews.model.News
 import com.jfapps.cryptonews.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_news.news_list as newsList
 
@@ -35,11 +37,17 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = NewsAdapter()
+        val adapter = NewsAdapter(::readNews)
         newsList.adapter = adapter
         viewModel.news.observe(this,
             Observer {
                 (newsList.adapter as NewsAdapter).submitList(it)
             })
+    }
+
+    private fun readNews(news: News) {
+        val directions = NewsFragmentDirections
+            .actionNewsFragmentToDetailsFragment(news)
+        findNavController().navigate(directions)
     }
 }
