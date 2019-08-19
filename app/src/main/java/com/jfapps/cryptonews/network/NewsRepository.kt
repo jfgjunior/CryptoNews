@@ -1,5 +1,6 @@
 package com.jfapps.cryptonews.network
 
+import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.jfapps.cryptonews.model.News
 import kotlinx.coroutines.*
@@ -24,6 +25,7 @@ class NewsRepository @Inject constructor() : PageKeyedDataSource<Int, News>(), C
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, News>
     ) {
+
         launch(IO) {
             val result = newsApi.getCryptoNewsAsync(1)
             totalPages = maxPage(result.totalResults)

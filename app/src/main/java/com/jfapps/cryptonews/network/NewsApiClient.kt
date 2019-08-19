@@ -4,6 +4,7 @@ import com.jfapps.cryptonews.BuildConfig
 import com.jfapps.cryptonews.extensions.passedDays
 import com.jfapps.cryptonews.extensions.today
 import com.jfapps.cryptonews.model.Articles
+import kotlinx.coroutines.delay
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -46,7 +47,17 @@ class NewsApiClient {
         .build()
         .create(NewsEndpoint::class.java)
 
-    suspend fun getCryptoNewsAsync(page: Int) = retrofit.getCryptoNewsAsync(page)
+    suspend fun getCryptoNewsAsync(page: Int): Articles {
+        while (true) {
+            runCatching {
+                retrofit.getCryptoNewsAsync(page)
+            }.onSuccess {
+                return it
+            }.onFailure {
+                delay(300)
+            }
+        }
+    }
 
     interface NewsEndpoint {
         @GET("v2/everything")
