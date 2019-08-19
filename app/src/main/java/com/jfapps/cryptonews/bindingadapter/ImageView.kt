@@ -8,7 +8,7 @@ import com.squareup.picasso.Picasso
 
 @BindingAdapter("app:loadUrl")
 fun ImageView.loadUrl(url: String?) {
-    if (url != null) {
+    if (url != null && url.isNotEmpty()) {
         Picasso.get()
             .load(url)
             .into(this, object : Callback {
