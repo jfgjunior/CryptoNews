@@ -36,7 +36,6 @@ class NewsApiClient {
             .addEncodedQueryParameter(FROM_PARAM, Calendar.getInstance().today)
             .addEncodedQueryParameter(TO_PARAM, Calendar.getInstance().passedDays(MAX_DAYS_AGO))
             .build()
-        //TODO: Handle timeout
         it.proceed(request.newBuilder().url(url).build())
     }.build()
 

@@ -34,12 +34,14 @@ class NewsFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentNewsBinding>(
             inflater, R.layout.fragment_news, container, false
         )
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = NewsAdapter(::readNews)
+        val adapter = NewsAdapter(::readNews, ::stopProgress)
         newsList.adapter = adapter
         viewModel.news.observe(this,
             Observer {
@@ -53,10 +55,13 @@ class NewsFragment : Fragment() {
         }
     }
 
-
     private fun readNews(news: News) {
         val directions = NewsFragmentDirections
             .actionNewsFragmentToDetailsFragment(news)
         findNavController().navigate(directions)
+    }
+
+    private fun stopProgress(size: Int) {
+        viewModel.handleProgress(size)
     }
 }

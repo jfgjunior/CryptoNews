@@ -14,16 +14,17 @@ import kotlinx.android.synthetic.main.item_news.view.*
 import java.util.*
 import kotlin.reflect.KFunction1
 
-class NewsAdapter(private val callback: KFunction1<News, Unit>) :
+class NewsAdapter(private val callback: KFunction1<News, Unit>,
+                  private val stopProgress: KFunction1<Int, Unit>) :
     PagedListAdapter<News, NewsAdapter.NewsViewHolder>(newsDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_news, parent, false)
         return NewsViewHolder(view)
-
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+        stopProgress.invoke(currentList?.size ?: 0)
         getItem(position)?.let {
             holder.bind(it, callback)
         }

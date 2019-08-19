@@ -1,6 +1,5 @@
 package com.jfapps.cryptonews.network
 
-import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.jfapps.cryptonews.model.News
 import kotlinx.coroutines.*
@@ -19,6 +18,7 @@ class NewsRepository @Inject constructor() : PageKeyedDataSource<Int, News>(), C
 
     private val job = Job()
     private var totalPages = 0
+    private val newsApi = NewsApiClient()
     override val coroutineContext = job + Dispatchers.Main
 
     override fun loadInitial(
@@ -45,7 +45,6 @@ class NewsRepository @Inject constructor() : PageKeyedDataSource<Int, News>(), C
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, News>) {}
 
-    private val newsApi = NewsApiClient()
     private fun maxPage(totalResults: Int): Int =
         min(ceil(totalResults / NEWS_PER_PAGE).toInt(), MAX_PAGES)
 
