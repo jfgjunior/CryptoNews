@@ -8,7 +8,7 @@ import com.jfapps.cryptonews.ApplicationComponent
 
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T : ViewModel> Fragment.viewModel(
-        crossinline factory: () -> T
+    crossinline factory: () -> T
 ) = viewModels<T> {
     object : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>) = factory() as T

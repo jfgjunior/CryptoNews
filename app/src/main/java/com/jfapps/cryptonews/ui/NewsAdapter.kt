@@ -3,8 +3,8 @@ package com.jfapps.cryptonews.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jfapps.cryptonews.R
 import com.jfapps.cryptonews.bindingadapter.loadUrl
@@ -15,7 +15,7 @@ import java.util.*
 import kotlin.reflect.KFunction1
 
 class NewsAdapter(private val callback: KFunction1<News, Unit>) :
-    ListAdapter<News, NewsAdapter.NewsViewHolder>(newsDiffCallback) {
+    PagedListAdapter<News, NewsAdapter.NewsViewHolder>(newsDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_news, parent, false)
@@ -24,7 +24,9 @@ class NewsAdapter(private val callback: KFunction1<News, Unit>) :
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        holder.bind(getItem(position), callback)
+        getItem(position)?.let {
+            holder.bind(it, callback)
+        }
     }
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

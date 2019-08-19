@@ -9,7 +9,7 @@ import com.squareup.inject.assisted.AssistedInject
 
 class WebViewModel @AssistedInject constructor(
     @Assisted val url: String
-): ViewModel() {
+) : ViewModel() {
     private val _progress = MutableLiveData<Int>().apply { value = View.VISIBLE }
     private val _progressVisibility = MutableLiveData<Int>()
     val progress: LiveData<Int>

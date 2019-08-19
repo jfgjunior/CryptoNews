@@ -1,5 +1,6 @@
 package com.jfapps.cryptonews
 
+import com.jfapps.cryptonews.network.NewsDataSourceFactory
 import com.jfapps.cryptonews.network.NewsRepository
 import com.jfapps.cryptonews.viewmodel.DetailsViewModel
 import com.jfapps.cryptonews.viewmodel.NewsViewModel
@@ -14,4 +15,5 @@ interface ApplicationComponent {
     val newsViewModelFactory: NewsViewModel.Factory
     val detailsViewModelFactory: DetailsViewModel.Factory
     val webViewModelFactory: WebViewModel.Factory
+    val newsDataSourceFactory: NewsDataSourceFactory
 }
