@@ -53,7 +53,6 @@ class NewsFragment : Fragment() {
         }
     }
 
-
     private fun readNews(news: News) {
         val directions = NewsFragmentDirections
             .actionNewsFragmentToDetailsFragment(news)

@@ -20,7 +20,6 @@ class NewsAdapter(private val callback: KFunction1<News, Unit>) :
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_news, parent, false)
         return NewsViewHolder(view)
-
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
