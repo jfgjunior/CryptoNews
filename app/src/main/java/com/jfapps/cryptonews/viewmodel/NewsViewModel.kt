@@ -1,6 +1,8 @@
 package com.jfapps.cryptonews.viewmodel
 
+import android.view.View
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -15,7 +17,9 @@ class NewsViewModel @AssistedInject constructor(
     companion object {
         const val CREDIT_URL = "https://newsapi.org/"
     }
-
+    private val _progressVisibility = MutableLiveData<Int>().apply { View.VISIBLE }
+    val progressVisibility: LiveData<Int>
+        get() = _progressVisibility
     val news: LiveData<PagedList<News>>
 
     init {
@@ -34,5 +38,11 @@ class NewsViewModel @AssistedInject constructor(
     @AssistedInject.Factory
     interface Factory {
         fun create(newsDataSourceFactory: NewsDataSourceFactory): NewsViewModel
+    }
+
+    fun handleProgress(listSize: Int) {
+        if(listSize > 0) {
+            _progressVisibility.value = View.GONE
+        }
     }
 }

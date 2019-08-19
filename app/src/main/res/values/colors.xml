@@ -7,4 +7,5 @@
     <color name="linkColor">@android:color/holo_blue_dark</color>
     <color name="newsListBackgroundColor">#DBDBDB</color>
     <color name="white">@android:color/white</color>
+    <color name="shimmerBackground">#dddddd</color>
 </resources>
