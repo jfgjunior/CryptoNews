@@ -1,7 +1,5 @@
 package com.jfapps.cryptonews.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +12,6 @@ import com.jfapps.cryptonews.databinding.FragmentDetailsBinding
 import com.jfapps.cryptonews.extensions.inject
 import com.jfapps.cryptonews.extensions.viewModel
 import com.jfapps.cryptonews.viewmodel.DetailsViewModel
-import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.fragment_details.continue_reading as continueReading
 
 class DetailsFragment : Fragment() {

@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_news.news_list as newsList
 class NewsFragment : Fragment() {
     private val viewModel: NewsViewModel by viewModel {
         inject.newsViewModelFactory.create(
-            inject.newsRepository
+            inject.newsDataSourceFactory
         )
     }
 
@@ -34,7 +34,6 @@ class NewsFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentNewsBinding>(
             inflater, R.layout.fragment_news, container, false
         )
-        viewModel.fetchNews()
         return binding.root
     }
 
@@ -53,6 +52,7 @@ class NewsFragment : Fragment() {
             startActivity(intent)
         }
     }
+
 
     private fun readNews(news: News) {
         val directions = NewsFragmentDirections
