@@ -37,14 +37,26 @@ class NewsWebViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        webview.settings.loadsImagesAutomatically = true
-        webview.settings.javaScriptEnabled = true
-        webview.webChromeClient = object : WebChromeClient() {
-            override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                super.onProgressChanged(view, newProgress)
-                viewModel.handleProgress(newProgress)
+        if (savedInstanceState == null) {
+            webview.settings.loadsImagesAutomatically = true
+            webview.settings.javaScriptEnabled = true
+            webview.webChromeClient = object : WebChromeClient() {
+                override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                    super.onProgressChanged(view, newProgress)
+                    viewModel.handleProgress(newProgress)
+                }
             }
+            webview.loadUrl(viewModel.url)
         }
-        webview.loadUrl(viewModel.url)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        webview.saveState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        webview.restoreState(savedInstanceState)
     }
 }
